@@ -27,8 +27,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         var y = Input.GetAxis(axis) * Time.deltaTime * speed;
-        
+        var bound = Camera.main.GetComponent<Camera>().orthographicSize * 0.85f;    
+
         transform.Translate(0,y,0);
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,0f,8.5f), transform.position.z);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-bound,bound), transform.position.z);
     }
 }
