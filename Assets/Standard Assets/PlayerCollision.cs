@@ -5,8 +5,13 @@ public class PlayerCollision : MonoBehaviour {
     {
         if (other.gameObject.tag == "Car")
         {
-            gameObject.GetComponent<PlayerController>().canControl = false;
-            gameObject.AddComponent<PlayerCrashing>();
+            gameObject.GetComponent<PlayerController>().CrashWithCar();
+        }
+        
+        if (other.gameObject.tag == "Goal") {
+            int player = gameObject.GetComponent<PlayerController>().player;
+            ScoreManager.instance.Score(player);
+            gameObject.GetComponent<PlayerController>().ResetPosition();
         }
     }
 }

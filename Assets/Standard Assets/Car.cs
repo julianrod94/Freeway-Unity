@@ -27,31 +27,32 @@ public class Car : MonoBehaviour {
 		currentSpeed = initialSpeed;
 
 		
-		initialPosition = transform.position;
+		initialPosition = new Vector3(horizontalBorder()*Math.Sign(initialSpeed)*-1, transform.position.y, 0);
+		transform.position = initialPosition;
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		var rand = new Random();
+	void Update() {		
+		var x = Time.deltaTime * currentSpeed;
+		transform.Translate(x, 0, 0);
 
-		if (Random.value < 0.01)
-		{
+		if (Random.value < 0.01) {
 			currentSpeed = initialSpeed * (0.8f + Random.value * 0.4f);
 		}
 
-		var sceenWidth = Screen.width;
-		
-		
-		var x = Time.deltaTime * currentSpeed;
-		
-		
-		var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;    
-		var horzExtent = vertExtent * Screen.width / Screen.height;
+		var border = horizontalBorder();
 
-		if (Math.Abs(transform.position.x) > Math.Abs(horzExtent*1.2))
-		{
+		if (direction == Direction.RIGHT && transform.position.x > border) {
 			transform.position = initialPosition;
 		}
-		transform.Translate(x, 0, 0);
+		else if (direction == Direction.LEFT && transform.position.x < -border) {
+			transform.position = initialPosition;
+		}
+	}
+
+	private float horizontalBorder() {
+		var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
+		var horzExtent = vertExtent * Screen.width / Screen.height;
+		return horzExtent * 1.2f;
 	}
 }
