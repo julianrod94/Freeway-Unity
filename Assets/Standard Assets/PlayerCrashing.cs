@@ -5,7 +5,9 @@ using UnityEngine;
 public class PlayerCrashing : MonoBehaviour
 {
 
-	private float timeCrashing = 1f;
+	private const float timeCrashing = 0.7f;
+	private const float crashingSpeed = -0.08f;
+	
 	public float timeLeft;
 		
 	// Use this for initialization
@@ -19,15 +21,21 @@ public class PlayerCrashing : MonoBehaviour
 		if (timeLeft > 0)
 		{
 			var bound = Camera.main.GetComponent<Camera>().orthographicSize * 0.85f;
-			transform.Translate(0,-0.01f,0);
+			transform.Translate(0,crashingSpeed,0,Space.World);
 			transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-bound,bound), transform.position.z);
+			transform.Rotate(new Vector3(0,0,1), -15f);
 		}
 		else
 		{
 			gameObject.GetComponent<PlayerController>().canControl = true;
+			transform.rotation = Quaternion.identity;
 			Destroy(this);
 		}
-
+		
 		timeLeft -= Time.deltaTime;
+	}
+
+	public void AddTime() {
+		timeLeft = timeCrashing;
 	}
 }
