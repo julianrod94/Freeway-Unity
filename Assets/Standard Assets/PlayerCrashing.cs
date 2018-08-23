@@ -1,41 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerCrashing : MonoBehaviour
-{
-
-	private const float timeCrashing = 0.7f;
-	private const float crashingSpeed = -0.08f;
+namespace Standard_Assets {
+	public class PlayerCrashing : MonoBehaviour {
 	
-	public float timeLeft;
+		public float TimeLeft;
 		
-	// Use this for initialization
-	void Start ()
-	{
-		timeLeft = timeCrashing;
-	}
+		void Start () {
+			TimeLeft = GameConstants.Crash.Time;
+			transform.Rotate(0,0,90);
+		}
 	
-	// Update is called once per frame
-	void Update () {
-		if (timeLeft > 0)
-		{
-			var bound = Camera.main.GetComponent<Camera>().orthographicSize * 0.85f;
-			transform.Translate(0,crashingSpeed,0,Space.World);
-			transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-bound,bound), transform.position.z);
-			transform.Rotate(new Vector3(0,0,1), -15f);
-		}
-		else
-		{
-			gameObject.GetComponent<PlayerController>().canControl = true;
-			transform.rotation = Quaternion.identity;
-			Destroy(this);
-		}
+		// Update is called once per frame
+		void Update () {
+			if (TimeLeft > 0) {
+				transform.Translate(0,GameConstants.Crash.Speed,0,Space.World);
+				var newY = Mathf.Clamp(transform.position.y,
+					GameConstants.Controlable.LowerBound,
+					GameConstants.Controlable.UpperBound);
+				transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+				transform.Rotate(Vector3.up, GameConstants.Crash.RotationSpeed);
+			} else {
+				gameObject.GetComponent<PlayerController>().CanControl = true;
+				transform.rotation = Quaternion.identity;
+				Destroy(this);
+			}
 		
-		timeLeft -= Time.deltaTime;
-	}
+			TimeLeft -= Time.deltaTime;
+		}
 
-	public void AddTime() {
-		timeLeft = timeCrashing;
+		public void AddTime() {
+			TimeLeft = GameConstants.Crash.Time;
+		}
 	}
 }

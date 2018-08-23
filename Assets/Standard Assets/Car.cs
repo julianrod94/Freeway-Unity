@@ -2,57 +2,63 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class Car : MonoBehaviour {
+namespace Standard_Assets
+{
+    public enum CarDirection {
+        Left,Right
+    }
+    
+    public class Car : MonoBehaviour {
+
+        public CarDirection Direction;      
+ 
+        private float _currentSpeed;
+        private int _limit;
+        private float _initialSpeed;
+
+        private Vector3 InitialPosition {
+            get {
+                float border;
+                if (Direction == CarDirection.Left) {
+                    border = GameConstants.World.OutsideRightBound;
+                } else {
+                    border = GameConstants.World.OutsideLeftBound;
+                }
+                
+                return new Vector3(border, transform.position.y, 0);
+            }
+        }
+
+        // Use this for initialization
+        void Start ()
+        {
+            
+            if (Direction == CarDirection.Left) {
+                _initialSpeed = -GameConstants.Car.InitialSpeed;
+            } else {
+                _initialSpeed = GameConstants.Car.InitialSpeed;
+
+            }
+            _currentSpeed = _initialSpeed;
+
+            transform.position = InitialPosition;
+        }
 	
-	public float initialSpeed;
-	private float currentSpeed;
-	private int limit;
-	
-	public Direction direction;
+        // Update is called once per frame
+        void Update() {		
+            var x = Time.deltaTime * _currentSpeed;
+            transform.Translate(x, 0, 0);
 
-	public enum Direction
-	{
-		LEFT,RIGHT
-	}
+            if (Random.value < GameConstants.Car.ChanceChangingSpeed) {
+                _currentSpeed = _initialSpeed * (0.8f + Random.value * 0.4f);
+            }
 
-	private Vector3 initialPosition;
-
-	// Use this for initialization
-	void Start ()
-	{
-		if (direction == Direction.LEFT)
-		{
-			initialSpeed = -initialSpeed;
-		}
-		currentSpeed = initialSpeed;
-
-		
-		initialPosition = new Vector3(horizontalBorder()*Math.Sign(initialSpeed)*-1, transform.position.y, 0);
-		transform.position = initialPosition;
-	}
-	
-	// Update is called once per frame
-	void Update() {		
-		var x = Time.deltaTime * currentSpeed;
-		transform.Translate(x, 0, 0);
-
-		if (Random.value < 0.01) {
-			currentSpeed = initialSpeed * (0.8f + Random.value * 0.4f);
-		}
-
-		var border = horizontalBorder();
-
-		if (direction == Direction.RIGHT && transform.position.x > border) {
-			transform.position = initialPosition;
-		}
-		else if (direction == Direction.LEFT && transform.position.x < -border) {
-			transform.position = initialPosition;
-		}
-	}
-
-	private float horizontalBorder() {
-		var vertExtent = Camera.main.GetComponent<Camera>().orthographicSize;
-		var horzExtent = vertExtent * Screen.width / Screen.height;
-		return horzExtent * 1.2f;
-	}
+            if (Direction == CarDirection.Right && transform.position.x > GameConstants.World.OutsideRightBound) {
+                transform.position = InitialPosition;
+            }
+            else if (Direction == CarDirection.Left && transform.position.x < GameConstants.World.OutsideLeftBound) {
+                transform.position = InitialPosition;
+            }
+        }
+    }
 }

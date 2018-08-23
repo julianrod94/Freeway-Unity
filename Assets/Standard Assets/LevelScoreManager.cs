@@ -1,23 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LevelScoreManager: MonoBehaviour {
+namespace Standard_Assets {
+    public class LevelScoreManager: MonoBehaviour {
+        
+        public Text TextScoreP1;
+        public Text TextScoreP2;
     
-    
-    [SerializeField]
-    private Text textScoreP1;
-    [SerializeField]
-    private Text textScoreP2;
-
-    
-    private void Start() {
-        ScoreManager.instance.addCallBack(() => {
-            textScoreP1.text = ScoreManager.instance.p1Score.ToString();
-            textScoreP2.text = ScoreManager.instance.p2score.ToString();
-        });
+        private void Start() {
+            ScoreManager.Instance.AddCallBack(() => {
+                TextScoreP1.text = ScoreManager.Instance.P1Score.ToString();
+                TextScoreP2.text = ScoreManager.Instance.P2Score.ToString();
+            });
+        }
     }
 }
 

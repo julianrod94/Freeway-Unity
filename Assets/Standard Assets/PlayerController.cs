@@ -1,56 +1,54 @@
 ﻿using System;
-using System.Security.Policy;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
-{
-    public int speed;
-    public int player;
-    private Vector3 initialPosition;
+namespace Standard_Assets {
+    public class PlayerController : MonoBehaviour {
+        public Player Player;
+        public bool CanControl;
 
-    public bool canControl = true;
-    private String axis;
+        private Vector3 _initialPosition;
+        private String _axis;
 
-    // Use this for initialization
-    void Start()
-    {
-        if (player == 1)
-        {
-            axis = "P1_Vertical";
-        }
-        else
-        {
-            axis = "P2_Vertical";
-        }
-
-        initialPosition = transform.position;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (canControl){
-            var y = Input.GetAxis(axis) * Time.deltaTime * speed;
-            var bound = Camera.main.GetComponent<Camera>().orthographicSize * 0.85f;
-            transform.Translate(0, y, 0);
-            transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-bound,bound), transform.position.z);
+        // Use this for initialization
+        void Start() {
+            CanControl = true;
+            _initialPosition = transform.position;
+            
+            if (Player == Player.Player1) {
+                _axis = "P1_Vertical";
+            } else {
+                _axis = "P2_Vertical";
+            }
         }
 
-    }
-
-    public void ResetPosition() {
-        transform.position = initialPosition;
-    }
-
-    public void CrashWithCar() {
-        gameObject.GetComponent<PlayerController>().canControl = false;
-
-        var playerCrashing = gameObject.GetComponent<PlayerCrashing>();
-        if (playerCrashing == null) {
-            gameObject.AddComponent<PlayerCrashing>();
+        // Update is called once per frame
+        void Update() {
+            if (CanControl){
+                var y = Input.GetAxis(_axis) * Time.deltaTime * GameConstants.Player.Speed;
+                transform.Translate(0, y, 0);
+                var newY = Mathf.Clamp(
+                    transform.position.y,
+                    GameConstants.Controlable.LowerBound,
+                    GameConstants.Controlable.UpperBound
+                );
+                
+                transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+            }
         }
-        else {
-            playerCrashing.AddTime();
+
+        public void ResetPosition() {
+            transform.position = _initialPosition;
+        }
+
+        public void CrashWithCar() {
+            gameObject.GetComponent<PlayerController>().CanControl = false;
+
+            var playerCrashing = gameObject.GetComponent<PlayerCrashing>();
+            if (playerCrashing == null) {
+                gameObject.AddComponent<PlayerCrashing>();
+            } else {
+                playerCrashing.AddTime();
+            }
         }
     }
 }

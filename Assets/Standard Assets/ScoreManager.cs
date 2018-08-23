@@ -1,66 +1,56 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class ScoreManager
-{
+namespace Standard_Assets {
+    public class ScoreManager {
 
-    private static ScoreManager _instance = null;
-    public static ScoreManager instance
-    {
-        get
-        {
-            if (_instance == null)
-                _instance = new ScoreManager();
+        private static ScoreManager _instance = null;
+        public static ScoreManager Instance {
+            get {
+                if (_instance == null)
+                    _instance = new ScoreManager();
 
-            return _instance;
+                return _instance;
+            }
+            private set { _instance = value; }
         }
-        private set { }
-    }
 
-    public enum Player{ Player1, Player2 }
-
-    public int maxScore;
+        public int MaxScore;
   
-    private int _p1Score;
-    public int p1Score {
-        get{ return _p1Score; }
-        set { _p1Score = value; notifyChange(); }
-    }
+        private int _p1Score;
+        public int P1Score {
+            get{ return _p1Score; }
+            set { _p1Score = value; NotifyChange(); }
+        }
   
-    private int _p2Score;
-    public int p2score {
-        get{ return _p2Score; }
-        set { _p2Score = value; notifyChange(); }
-    }
-
-    private List<Action> callbacks = new List<Action>();
-
-    public void emptyCallBacks()
-    {
-        callbacks = new List<Action>();   
-    }
-
-    public void addCallBack(Action callBack)
-    {
-        callbacks.Add(callBack);
-    }
-
-    private void notifyChange()
-    {
-        foreach (var callback in callbacks)
-        {
-            callback.Invoke();
+        private int _p2Score;
+        public int P2Score {
+            get{ return _p2Score; }
+            set { _p2Score = value; NotifyChange(); }
         }
-    }
 
-    public void Score(int player) {
-        if (player == 1) {
-            p1Score++;
+        private List<Action> _callbacks = new List<Action>();
+
+        public void EmptyCallBacks() {
+            _callbacks = new List<Action>();   
         }
-        else {
-            p2score++;
+
+        public void AddCallBack(Action callBack) {
+            _callbacks.Add(callBack);
+        }
+
+        private void NotifyChange() {
+            foreach (var callback in _callbacks) {
+                callback.Invoke();
+            }
+        }
+
+        public void Score(Player player) {
+            if (player == Player.Player1) {
+                P1Score++;
+            } else {
+                P2Score++;
+            }
         }
     }
 }
