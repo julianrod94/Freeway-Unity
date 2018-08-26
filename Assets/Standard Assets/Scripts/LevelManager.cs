@@ -68,6 +68,10 @@ namespace Standard_Assets.Scripts {
         public static void SetLevel(int level) {
             Vehicle[][] SelectedLevel = null;
             switch (level) {
+                case 0:
+                    SelectedLevel = GenerateRandomLevel();
+                    break;
+                
                 case 1:
                     SelectedLevel = Level1;
                     break;
@@ -99,13 +103,14 @@ namespace Standard_Assets.Scripts {
             ScaleAdapter.adaptToHeight(truck, GameConstants.FreeWay.CarHeight);
 
             float car1Size = car1.GetComponent<SpriteRenderer>()
-                .sprite.bounds.size.x * 6;
+                .sprite.bounds.size.x  * car1.transform.localScale.x;
             
             float truckSize = truck.GetComponent<SpriteRenderer>()
-                                 .sprite.bounds.size.x * 6;
+                                 .sprite.bounds.size.x * truck.transform.localScale.x;
 
+            Debug.Log(car1Size);
             for (int i = 0; i < 10; i++) {
-                float currentPosition = GameConstants.World.Width;
+                float currentPosition = GameConstants.World.OutsideRightBound;
                 
                 foreach (var vehicle in SelectedLevel[i]) {
 
@@ -123,7 +128,7 @@ namespace Standard_Assets.Scripts {
                             currentPosition += car1Size;
                             break;
                         case Vehicle.Truck:
-                            Object.Instantiate(truck, spawnPosition, Quaternion.identity);
+                            newCar = Object.Instantiate(truck, spawnPosition, Quaternion.identity);
                             currentPosition += truckSize;
                             break;
                         case Vehicle.None:
@@ -145,6 +150,33 @@ namespace Standard_Assets.Scripts {
                 
             }
             
+        }
+
+        private static Vehicle[][] GenerateRandomLevel() {
+            var randomLevel = new Vehicle[10][];
+            for (int i = 0; i < 10; i++) {
+                var lane = new Vehicle[8];
+                for (int j = 0; j < 8; j++) {
+                    lane[j] = GetNextRandomVehicle();
+                }
+                randomLevel[i] = lane;
+            }
+
+            return randomLevel;
+        }
+
+        private static Vehicle GetNextRandomVehicle() {
+            var rand = Random.value;
+            if (rand < 0.8) {
+                return Vehicle.None;
+            }
+
+            if (rand < 0.95) {
+                return Vehicle.Car;
+            }
+
+            return Vehicle.Truck;
+
         }
 
     }

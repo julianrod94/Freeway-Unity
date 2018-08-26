@@ -15,7 +15,7 @@ namespace Standard_Assets.Scripts {
         }
 
         void Start() {
-            LevelManager.SetLevel(2);
+            LevelManager.SetLevel(0);
             for (int i = 0; i < 10; i++) {
                 LaneVelocities[i] = GameConstants.Car.InitialSpeed * (0.8f + Random.value * 0.4f);
             }
