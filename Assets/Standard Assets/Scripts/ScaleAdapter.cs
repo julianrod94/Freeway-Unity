@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
     public static class ScaleAdapter {
         public static void adaptToHeight(GameObject go, float height) { 
             SpriteRenderer spriteRenderer = go.GetComponent<SpriteRenderer>();

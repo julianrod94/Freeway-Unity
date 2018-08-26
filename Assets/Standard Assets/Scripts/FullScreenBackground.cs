@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Standard_Assets;
+using Standard_Assets.Scripts;
 using UnityEngine;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
 
 	public class FullScreenBackground : MonoBehaviour {
 
@@ -16,9 +16,7 @@ namespace Standard_Assets {
 				GameConstants.World.Height / spriteSize.y
 			);
 			transform.localScale = newScale;
-			transform.position = Vector2.zero;
-
-			LevelManager.SetLevel(2);
+			transform.position = new Vector3(0,0,5);
 		}
 	}
 }

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
 
     enum Vehicle {
         Car,
@@ -99,20 +99,20 @@ namespace Standard_Assets {
             ScaleAdapter.adaptToHeight(truck, GameConstants.FreeWay.CarHeight);
 
             float car1Size = car1.GetComponent<SpriteRenderer>()
-                .sprite.bounds.size.x * car1.transform.localScale.x;
+                .sprite.bounds.size.x * 6;
+            
             float truckSize = truck.GetComponent<SpriteRenderer>()
-                                 .sprite.bounds.size.x * truck.transform.localScale.x;
+                                 .sprite.bounds.size.x * 6;
 
             for (int i = 0; i < 10; i++) {
                 float currentPosition = GameConstants.World.Width;
                 
                 foreach (var vehicle in SelectedLevel[i]) {
-                    Debug.Log(currentPosition);
 
                     Vector3 spawnPosition = new Vector3(
                         currentPosition,
                         GameConstants.FreeWay.LaneHeight * (5 - i) - GameConstants.FreeWay.LaneHeight/2,
-                        0.3f
+                        -1f
                         );
 
                     GameObject newCar = null;
@@ -130,14 +130,16 @@ namespace Standard_Assets {
                             break;
                     }
 
-                    if (newCar != null) {                        
-                        newCar.GetComponent<Car>().Direction = i < 5 ? CarDirection.Left : CarDirection.Right;
+                    if (newCar != null) {
+                        var carComponent = newCar.GetComponent<Car>();
+                        carComponent.Direction = i < 5 ? CarDirection.Left : CarDirection.Right;
+                        carComponent.Lane = i;
                     }
 
                     currentPosition += car1Size;
                     if (currentPosition > GameConstants.World.OutsideRightBound) {
-                        currentPosition %= GameConstants.World.OutsideBoundSize;
                         currentPosition -= GameConstants.World.OutsideRightBound;
+                        currentPosition = GameConstants.World.OutsideLeftBound + currentPosition;
                     }
                 }
                 

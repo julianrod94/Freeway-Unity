@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
     public class PlayerController : MonoBehaviour {
         public Player Player;
         
@@ -51,8 +51,6 @@ namespace Standard_Assets {
         }
 
         public void CrashWithCar() {
-            gameObject.GetComponent<PlayerController>()._canControl = false;
-
             var playerCrashing = gameObject.GetComponent<PlayerCrashing>();
             if (playerCrashing == null) {
                 gameObject.AddComponent<PlayerCrashing>();

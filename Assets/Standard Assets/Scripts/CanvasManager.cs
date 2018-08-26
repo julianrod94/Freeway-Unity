@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Standard_Assets;
+using Standard_Assets.Scripts;
 using UnityEngine;
 
 public class CanvasManager : MonoBehaviour {
@@ -53,6 +53,22 @@ public class CanvasManager : MonoBehaviour {
 
 	public void PlayGame() {
 		GameManager.Instance.State = GameState.Playing;
+	}
+
+	public void SetHardDifficulty(bool player1) {
+		if (player1) {
+			GameManager.Instance.P1Difficulty = Difficulty.Hard;
+		} else {
+			GameManager.Instance.P2Difficulty = Difficulty.Hard;
+		}
+	}
+	
+	public void SetEasyDifficulty(bool player1) {
+		if (player1) {
+			GameManager.Instance.P1Difficulty = Difficulty.Easy;
+		} else {
+			GameManager.Instance.P2Difficulty = Difficulty.Easy;
+		}
 	}
 
 	private void DisableAll() {

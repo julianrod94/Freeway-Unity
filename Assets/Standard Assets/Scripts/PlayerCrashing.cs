@@ -1,13 +1,26 @@
 ﻿using UnityEngine;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
 	public class PlayerCrashing : MonoBehaviour {
 	
 		private float _timeLeft;
 		
 		void Start () {
-			_timeLeft = GameConstants.Crash.Time;
-			transform.Rotate(0,0,90);
+			var controller = GetComponent<PlayerController>();
+			var difficulty = GameManager.Instance.GetDifficulty(controller.Player);
+			switch (difficulty) {
+				case Difficulty.Easy:
+					_timeLeft = GameConstants.Crash.Time;
+					transform.Rotate(0,0,90);
+					controller.SetControl(false);
+					break;
+				case Difficulty.Hard:
+					controller.ResetPosition();
+					controller.SetControl(true);
+					Destroy(this);
+					break;
+			}
+
 		}
 	
 		// Update is called once per frame

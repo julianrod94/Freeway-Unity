@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
     public class ScoreManager {
 
         private static ScoreManager _instance = null;

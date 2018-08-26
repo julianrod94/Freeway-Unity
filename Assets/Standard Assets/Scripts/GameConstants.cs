@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
     public enum Player {
         Player1,
         Player2
@@ -64,14 +64,14 @@ namespace Standard_Assets {
         //Crash
         public static class Crash {
             public static float Time  = 0.7f;
-            public static float Speed  = -0.08f;
-            public static float RotationSpeed = -15f;
+            public static float Speed  = -2f;
+            public static float RotationSpeed = -500f;
         }
         
         //Car
         public static class Car {
             public static float InitialSpeed = 2f;
-            public static float ChanceChangingSpeed = 0.01f;
+            public static float ChanceChangingSpeed = 0.005f;
         }
 
         private void Awake() {

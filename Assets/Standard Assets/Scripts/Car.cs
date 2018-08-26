@@ -2,7 +2,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-namespace Standard_Assets
+namespace Standard_Assets.Scripts
 {
     public enum CarDirection {
         Left,Right
@@ -10,24 +10,25 @@ namespace Standard_Assets
     
     public class Car : MonoBehaviour {
 
+        public int Lane;
         private CarDirection _direction;
 
         public CarDirection Direction {
             get { return _direction; }
             set {
-                transform.rotation = value == CarDirection.Left ? Quaternion.identity : Quaternion.Euler(0,0,180);
+                transform.rotation = value == CarDirection.Right ? Quaternion.identity : Quaternion.Euler(0,0,180);
                 _direction = value;
             }
         }      
  
+        [SerializeField]
         private float _currentSpeed;
         private int _limit;
         private float _initialSpeed;
 
         private Vector3 InitialPosition {
             get {
-                float border;
-                border = 
+                var border = 
                     Direction == CarDirection.Left 
                         ? GameConstants.World.OutsideRightBound : GameConstants.World.OutsideLeftBound;
                 
@@ -39,18 +40,14 @@ namespace Standard_Assets
         void Start (){
             _initialSpeed = -GameConstants.Car.InitialSpeed;
             _currentSpeed = _initialSpeed;
-
-            transform.position = InitialPosition;
         }
 	
         // Update is called once per frame
-        void Update() {		
+        void Update() {
+            _currentSpeed = CarCoordinator.Instance.LaneVelocities[Lane];
+            
             var x = Time.deltaTime * _currentSpeed;
             transform.Translate(x, 0, 0);
-
-            if (Random.value < GameConstants.Car.ChanceChangingSpeed) {
-                _currentSpeed = _initialSpeed * (0.8f + Random.value * 0.4f);
-            }
 
             if (Direction == CarDirection.Right && transform.position.x > GameConstants.World.OutsideRightBound) {
                 transform.position = InitialPosition;

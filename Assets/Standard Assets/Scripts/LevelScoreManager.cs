@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-namespace Standard_Assets {
+namespace Standard_Assets.Scripts {
     public class LevelScoreManager: MonoBehaviour {
         
         public Text TextScoreP1;
