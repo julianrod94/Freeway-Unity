@@ -8,6 +8,7 @@ namespace Standard_Assets.Scripts {
         private bool _canControl;
         private Vector3 _initialPosition;
         private String _axis;
+        private AxisProvider _axisProvider;
 
         // Use this for initialization
         void Start() {
@@ -19,6 +20,12 @@ namespace Standard_Assets.Scripts {
             } else {
                 _axis = "P2_Vertical";
             }
+
+            if (GameManager.Instance.IsMobile) {
+                _axisProvider = FindObjectOfType<TouchAxis>();                
+            } else {
+                _axisProvider = new NormalAxis();
+            }
         }
 
         // Update is called once per frame
@@ -29,7 +36,7 @@ namespace Standard_Assets.Scripts {
             }
             
             if (_canControl){
-                var y = Input.GetAxis(_axis) * Time.deltaTime * GameConstants.Player.Speed;
+                var y = _axisProvider.GetAxis(_axis) * Time.deltaTime * GameConstants.Player.Speed;
                 transform.Translate(0, y, 0);
                 var newY = Mathf.Clamp(
                     transform.position.y,

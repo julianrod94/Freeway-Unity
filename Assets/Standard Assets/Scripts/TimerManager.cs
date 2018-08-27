@@ -8,11 +8,6 @@ public class TimerManager : MonoBehaviour {
 
 	public Text TimeLabel;
 	
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if (GameManager.Instance.State == GameState.Playing) {

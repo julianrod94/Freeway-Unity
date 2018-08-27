@@ -2,6 +2,7 @@
     public enum GameState { Idle, Menu, Playing, Score }
     public enum Difficulty { Easy, Hard }
     public class GameManager {
+        public bool IsMobile = false;
 
         public int Level { get; private set; }
         public float Time { get; private set; }
@@ -15,6 +16,10 @@
         private GameManager() {
             Level = 0;
             Time = 60;
+            
+            #if UNITY_ANDROID	
+				IsMobile = true;
+			#endif
         }
 
         public static GameManager Instance {
