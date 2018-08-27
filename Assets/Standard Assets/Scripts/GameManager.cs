@@ -13,7 +13,7 @@
         private static GameManager _instance = null;
         
         private GameManager() {
-            Level = 1;
+            Level = 0;
             Time = 60;
         }
 
@@ -24,6 +24,24 @@
 
         public Difficulty GetDifficulty(Player player) {
             return player == Player.Player1 ? P1Difficulty : P2Difficulty;
+        }
+
+        public void AddLevel() {
+            Level = (Level + 1) % 5;
+            LevelManager.SetLevel(Level);
+        }
+
+        public void RemoveLevel() {
+            Level = (Level + 4) % 5;
+            LevelManager.SetLevel(Level);
+        }
+
+        public void AddTime() {
+            Time = (Time % 180) + 30;
+        }
+        
+        public void RemoveTime() {
+            Time = ((Time+120) % 180) + 30;
         }
         
     }

@@ -66,6 +66,11 @@ namespace Standard_Assets.Scripts {
         public static int Levels = 4;
 
         public static void SetLevel(int level) {
+            var cars = GameObject.FindGameObjectsWithTag("Car");
+            foreach (var car in cars) {
+                Object.Destroy(car);
+            }
+            
             Vehicle[][] SelectedLevel = null;
             switch (level) {
                 case 0:

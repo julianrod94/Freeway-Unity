@@ -23,6 +23,10 @@ namespace Standard_Assets.Scripts {
 
         // Update is called once per frame
         void Update() {
+            if (GameManager.Instance.State != GameState.Playing) {
+                return;
+            }
+            
             if (_canControl){
                 var y = Input.GetAxis(_axis) * Time.deltaTime * GameConstants.Player.Speed;
                 transform.Translate(0, y, 0);

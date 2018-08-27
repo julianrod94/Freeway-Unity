@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Standard_Assets.Scripts;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour {
 
@@ -9,6 +10,9 @@ public class CanvasManager : MonoBehaviour {
 	public Canvas Menu;
 	public Canvas Game;
 	public Canvas EndGame;
+
+	public Text LevelLabel;
+	public Text TimeLabel;
 
 	void Awake() {
 		DisableAll();	
@@ -25,6 +29,7 @@ public class CanvasManager : MonoBehaviour {
 				break;
 				
 			case GameState.Menu:
+				UpdateMenuLabels();
 				if (!Menu.gameObject.activeSelf) {
 					DisableAll();
 					Menu.gameObject.SetActive(true);
@@ -76,5 +81,34 @@ public class CanvasManager : MonoBehaviour {
 		Menu.gameObject.SetActive(false);
 		Game.gameObject.SetActive(false);
 		EndGame.gameObject.SetActive(false);
+	}
+
+	public void AddLevel() {
+		GameManager.Instance.AddLevel();
+	}
+	
+	public void RemoveLevel() {
+		GameManager.Instance.RemoveLevel();
+	}
+	
+	public void AddTime() {
+		GameManager.Instance.AddTime();
+	}
+	
+	public void RemoveTime() {
+		GameManager.Instance.RemoveTime();
+	}
+
+
+	private void UpdateMenuLabels() {
+		int level = GameManager.Instance.Level;
+
+		if (level == 0) {
+			LevelLabel.text = "?";			
+		} else {
+			LevelLabel.text = GameManager.Instance.Level.ToString();
+		}
+		
+		TimeLabel.text = GameManager.Instance.Time.ToString();
 	}
 }
