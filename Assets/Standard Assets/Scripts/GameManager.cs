@@ -4,7 +4,7 @@
     public class GameManager {
 
         public int Level { get; private set; }
-        public int Time { get; private set; }
+        public float Time { get; private set; }
         public Difficulty P1Difficulty = Difficulty.Easy;
         public Difficulty P2Difficulty = Difficulty.Easy;
         
@@ -42,6 +42,15 @@
         
         public void RemoveTime() {
             Time = ((Time+120) % 180) + 30;
+        }
+
+
+        public void AdvanceTime(float deltaTime) {
+            Time -= deltaTime;
+            if (Time < 0) {
+                Time = 0;
+                State = GameState.Score;
+            } 
         }
         
     }

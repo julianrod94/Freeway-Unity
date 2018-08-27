@@ -24,6 +24,7 @@ namespace Standard_Assets.Scripts {
         // Update is called once per frame
         void Update() {
             if (GameManager.Instance.State != GameState.Playing) {
+                transform.position = _initialPosition;
                 return;
             }
             

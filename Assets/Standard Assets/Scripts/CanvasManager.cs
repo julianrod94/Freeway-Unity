@@ -109,6 +109,6 @@ public class CanvasManager : MonoBehaviour {
 			LevelLabel.text = GameManager.Instance.Level.ToString();
 		}
 		
-		TimeLabel.text = GameManager.Instance.Time.ToString();
+		TimeLabel.text = Mathf.CeilToInt(GameManager.Instance.Time).ToString();
 	}
 }
