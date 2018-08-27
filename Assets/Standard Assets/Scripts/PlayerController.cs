@@ -37,6 +37,9 @@ namespace Standard_Assets.Scripts {
             
             if (_canControl){
                 var y = _axisProvider.GetAxis(_axis) * Time.deltaTime * GameConstants.Player.Speed;
+                
+                GetComponent<Animator>().SetBool("walking", y!=0);
+                
                 transform.Translate(0, y, 0);
                 var newY = Mathf.Clamp(
                     transform.position.y,

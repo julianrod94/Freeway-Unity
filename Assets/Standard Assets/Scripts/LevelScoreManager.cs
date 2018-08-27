@@ -6,12 +6,10 @@ namespace Standard_Assets.Scripts {
         
         public Text TextScoreP1;
         public Text TextScoreP2;
-    
-        private void Start() {
-            ScoreManager.Instance.AddCallBack(() => {
-                TextScoreP1.text = ScoreManager.Instance.P1Score.ToString();
-                TextScoreP2.text = ScoreManager.Instance.P2Score.ToString();
-            });
+
+        public void Update() {
+            TextScoreP1.text = ScoreManager.Instance.P1Score.ToString();
+            TextScoreP2.text = ScoreManager.Instance.P2Score.ToString();
         }
     }
 }
