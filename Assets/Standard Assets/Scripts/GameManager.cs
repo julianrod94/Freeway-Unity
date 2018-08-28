@@ -5,10 +5,9 @@
         public bool IsMobile = false;
 
         public int Level { get; private set; }
-        public float Time { get; private set; }
+        public float Time;
         public Difficulty P1Difficulty = Difficulty.Easy;
         public Difficulty P2Difficulty = Difficulty.Easy;
-        
         
         public GameState State = GameState.Idle;
         private static GameManager _instance = null;

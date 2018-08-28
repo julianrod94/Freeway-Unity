@@ -14,6 +14,8 @@ public class CanvasManager : MonoBehaviour {
 	public Text LevelLabel;
 	public Text TimeLabel;
 
+	private float _initialTime = GameManager.Instance.Time;
+
 	void Awake() {
 		DisableAll();	
 	}
@@ -53,10 +55,16 @@ public class CanvasManager : MonoBehaviour {
 	}
 
 	public void ToMenu() {
+		GameManager.Instance.Time = _initialTime;
+		ScoreManager.Instance.P1Score = 0;
+		ScoreManager.Instance.P2Score = 0;
 		GameManager.Instance.State = GameState.Menu;
 	}
 
 	public void PlayGame() {
+		GameManager.Instance.Time = _initialTime;
+		ScoreManager.Instance.P1Score = 0;
+		ScoreManager.Instance.P2Score = 0;
 		GameManager.Instance.State = GameState.Playing;
 	}
 
@@ -102,13 +110,14 @@ public class CanvasManager : MonoBehaviour {
 
 	private void UpdateMenuLabels() {
 		int level = GameManager.Instance.Level;
-
+	
 		if (level == 0) {
 			LevelLabel.text = "?";			
 		} else {
 			LevelLabel.text = GameManager.Instance.Level.ToString();
 		}
-		
+
+		_initialTime = GameManager.Instance.Time;
 		TimeLabel.text = Mathf.CeilToInt(GameManager.Instance.Time).ToString();
 	}
 }
