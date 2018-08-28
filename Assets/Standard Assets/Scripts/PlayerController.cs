@@ -9,6 +9,7 @@ namespace Standard_Assets.Scripts {
         private Vector3 _initialPosition;
         private String _axis;
         private AxisProvider _axisProvider;
+        
 
         // Use this for initialization
         void Start() {

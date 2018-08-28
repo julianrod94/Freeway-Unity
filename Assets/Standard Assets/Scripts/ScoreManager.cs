@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Standard_Assets.Scripts {
     public class ScoreManager {
@@ -43,8 +44,10 @@ namespace Standard_Assets.Scripts {
         public void Score(Player player) {
             if (player == Player.Player1) {
                 P1Score++;
+                AudioManager.Instance.playPlayer1Score();
             } else {
                 P2Score++;
+                AudioManager.Instance.playPlayer2Score();
             }
         }
     }
