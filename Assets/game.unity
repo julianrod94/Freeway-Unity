@@ -281,6 +281,8 @@ MonoBehaviour:
   player1ScoresSound: {fileID: 8300000, guid: 0c9d619798bc74d73b7adcba0f7f2ac6, type: 3}
   player2ScoresSound: {fileID: 8300000, guid: 9620113ec8511483cb7c0ce2401e1156, type: 3}
   deathSound: {fileID: 8300000, guid: 34c980a0e51734900926d43df3d47c02, type: 3}
+  winnedGameSound: {fileID: 8300000, guid: 02c61af970cf941e28933f9a6a4071ad, type: 3}
+  tiedGameSound: {fileID: 8300000, guid: 050bac8e54caf483ea9dd423377b987d, type: 3}
 --- !u!82 &162124391
 AudioSource:
   m_ObjectHideFlags: 0

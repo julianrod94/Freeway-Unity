@@ -13,7 +13,10 @@ namespace Standard_Assets.Scripts {
 		private AudioClip player2ScoresSound;
 		[SerializeField]
 		private AudioClip deathSound;
-		
+		[SerializeField]
+		private AudioClip winnedGameSound;
+		[SerializeField]
+		private AudioClip tiedGameSound;
 
 		private static AudioManager _instance = null;
 
@@ -44,6 +47,15 @@ namespace Standard_Assets.Scripts {
 			GetComponent<AudioSource>().PlayOneShot(deathSound);
 		}
 		
+		public void playGameWinnedSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(winnedGameSound);
+		}
+		
+		public void playGameTiedSound()
+		{
+			GetComponent<AudioSource>().PlayOneShot(tiedGameSound);
+		}
 	
 	}
 }
