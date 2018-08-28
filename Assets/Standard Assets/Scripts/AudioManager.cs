@@ -8,9 +8,11 @@ namespace Standard_Assets.Scripts {
 	{
 		
 		[SerializeField]
-		private AudioClip player1Scores;
+		private AudioClip player1ScoresSound;
 		[SerializeField]
-		private AudioClip player2Scores;
+		private AudioClip player2ScoresSound;
+		[SerializeField]
+		private AudioClip deathSound;
 		[SerializeField]
 		private AudioClip mainTheme;
 
@@ -22,7 +24,7 @@ namespace Standard_Assets.Scripts {
 			mainThemeLoop.clip = mainTheme;
 			playMainTheme();
 		}
-
+		
 		private static AudioManager _instance = null;
 
 		public static AudioManager Instance
@@ -39,12 +41,17 @@ namespace Standard_Assets.Scripts {
 
 		public void playPlayer1Score()
 		{
-			GetComponent<AudioSource>().PlayOneShot(player1Scores);
+			GetComponent<AudioSource>().PlayOneShot(player1ScoresSound);
 		}
 		
 		public void playPlayer2Score()
 		{
-			GetComponent<AudioSource>().PlayOneShot(player2Scores);
+			GetComponent<AudioSource>().PlayOneShot(player2ScoresSound);
+		}
+		
+		public void playPlayerDeath()
+		{
+			GetComponent<AudioSource>().PlayOneShot(deathSound);
 		}
 		
 		public void playMainTheme() {

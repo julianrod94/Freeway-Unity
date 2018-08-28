@@ -278,8 +278,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b80f1875e91364545a0b954ccdbf7a87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Scores: {fileID: 8300000, guid: 0c9d619798bc74d73b7adcba0f7f2ac6, type: 3}
-  player2Scores: {fileID: 8300000, guid: 9620113ec8511483cb7c0ce2401e1156, type: 3}
+  player1ScoresSound: {fileID: 8300000, guid: 0c9d619798bc74d73b7adcba0f7f2ac6, type: 3}
+  player2ScoresSound: {fileID: 8300000, guid: 9620113ec8511483cb7c0ce2401e1156, type: 3}
+  deathSound: {fileID: 8300000, guid: 34c980a0e51734900926d43df3d47c02, type: 3}
 --- !u!82 &162124391
 AudioSource:
   m_ObjectHideFlags: 0
