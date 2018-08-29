@@ -17,7 +17,19 @@ namespace Standard_Assets.Scripts {
 		private AudioClip winnedGameSound;
 		[SerializeField]
 		private AudioClip tiedGameSound;
+		[SerializeField]
+		private AudioClip mainTheme;
 
+
+		private AudioSource mainThemeLoop;
+
+		private void Start() {
+			mainThemeLoop = GetComponent<AudioSource>();
+			mainThemeLoop.loop = true;
+			mainThemeLoop.clip = mainTheme;
+			playMainTheme();
+		}
+		
 		private static AudioManager _instance = null;
 
 		public static AudioManager Instance
@@ -57,5 +69,12 @@ namespace Standard_Assets.Scripts {
 			GetComponent<AudioSource>().PlayOneShot(tiedGameSound);
 		}
 	
+		public void playMainTheme() {
+			mainThemeLoop.Play();
+		}
+
+		public void stopMainTheme() {
+			mainThemeLoop.Stop();
+		}
 	}
 }

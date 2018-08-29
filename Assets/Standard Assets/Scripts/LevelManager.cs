@@ -72,9 +72,24 @@ namespace Standard_Assets.Scripts {
             }
             
             Vehicle[][] SelectedLevel = null;
+            
+            var car1 = Resources.Load<GameObject>("Prefabs/Car1");
+            var car2 = Resources.Load<GameObject>("Prefabs/Car2");
+            var truck = Resources.Load<GameObject>("Prefabs/Truck");
+            
+            ScaleAdapter.adaptToHeight(car1, GameConstants.FreeWay.CarHeight);
+            ScaleAdapter.adaptToHeight(car2, GameConstants.FreeWay.CarHeight);
+            ScaleAdapter.adaptToHeight(truck, GameConstants.FreeWay.CarHeight);
+
+            float car1Size = car1.GetComponent<SpriteRenderer>()
+                .sprite.bounds.size.x  * car1.transform.localScale.x;
+            
+            float truckSize = truck.GetComponent<SpriteRenderer>()
+                                 .sprite.bounds.size.x * truck.transform.localScale.x;
+            
             switch (level) {
                 case 0:
-                    SelectedLevel = GenerateRandomLevel();
+                    SelectedLevel = GenerateRandomLevel(Mathf.FloorToInt(GameConstants.World.Width/(car1Size)));
                     break;
                 
                 case 1:
@@ -98,22 +113,6 @@ namespace Standard_Assets.Scripts {
                     break;
             }
 
-
-            var car1 = Resources.Load<GameObject>("Prefabs/Car1");
-            var car2 = Resources.Load<GameObject>("Prefabs/Car2");
-            var truck = Resources.Load<GameObject>("Prefabs/Truck");
-            
-            ScaleAdapter.adaptToHeight(car1, GameConstants.FreeWay.CarHeight);
-            ScaleAdapter.adaptToHeight(car2, GameConstants.FreeWay.CarHeight);
-            ScaleAdapter.adaptToHeight(truck, GameConstants.FreeWay.CarHeight);
-
-            float car1Size = car1.GetComponent<SpriteRenderer>()
-                .sprite.bounds.size.x  * car1.transform.localScale.x;
-            
-            float truckSize = truck.GetComponent<SpriteRenderer>()
-                                 .sprite.bounds.size.x * truck.transform.localScale.x;
-
-            Debug.Log(car1Size);
             for (int i = 0; i < 10; i++) {
                 float currentPosition = GameConstants.World.OutsideRightBound;
                 
@@ -157,11 +156,11 @@ namespace Standard_Assets.Scripts {
             
         }
 
-        private static Vehicle[][] GenerateRandomLevel() {
+        private static Vehicle[][] GenerateRandomLevel(int maxCars) {
             var randomLevel = new Vehicle[10][];
             for (int i = 0; i < 10; i++) {
-                var lane = new Vehicle[8];
-                for (int j = 0; j < 8; j++) {
+                var lane = new Vehicle[maxCars];
+                for (int j = 0; j < maxCars; j++) {
                     lane[j] = GetNextRandomVehicle();
                 }
                 randomLevel[i] = lane;

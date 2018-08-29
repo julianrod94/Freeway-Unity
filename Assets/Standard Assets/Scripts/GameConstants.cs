@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Standard_Assets.Scripts {
     public enum Player {
@@ -70,14 +71,19 @@ namespace Standard_Assets.Scripts {
         
         //Car
         public static class Car {
-            public static float InitialSpeed = 2f;
+            public static float InitialSpeed;
             public static float ChanceChangingSpeed = 0.005f;
+
+            public static void Calculate() {
+                InitialSpeed = World.Width / 8.0f;
+            }
         }
 
         private void Awake() {
             World.Calculate();
             Controlable.Calculate();  
             FreeWay.Calculate();
+            Car.Calculate();
         }
     }
 }
