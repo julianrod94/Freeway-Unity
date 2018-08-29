@@ -58,7 +58,7 @@ namespace Standard_Assets.Scripts {
 		
 		public void playPlayerDeath()
 		{
-			GetComponent<AudioSource>().PlayOneShot(deathSound);
+			GetComponent<AudioSource>().PlayOneShot(deathSound, 0.4f);
 		}
 		
 		public void playWonGameSound()
