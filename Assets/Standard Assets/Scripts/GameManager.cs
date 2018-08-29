@@ -58,7 +58,7 @@
                 var p2Score = ScoreManager.Instance.P2Score;
                 if (p1Score != p2Score){
                     AudioManager.Instance.stopMainTheme();
-                    AudioManager.Instance.playWinnedGameSound();
+                    AudioManager.Instance.playWonGameSound();
                 }
                 else
                 {
