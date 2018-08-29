@@ -20,6 +20,8 @@ namespace Standard_Assets.Scripts {
 		[SerializeField]
 		private AudioClip mainTheme;
 
+		private bool isPlayingMainLoop = false;
+
 
 		private AudioSource mainThemeLoop;
 
@@ -71,12 +73,14 @@ namespace Standard_Assets.Scripts {
 	
 		public void playMainTheme()
 		{
-			if (mainThemeLoop.isPlaying) return;
+			if (isPlayingMainLoop) return;
 			mainThemeLoop.Play();
+			isPlayingMainLoop = true;
 		}
 
 		public void stopMainTheme() {
 			mainThemeLoop.Stop();
+			isPlayingMainLoop = false;
 		}
 	}
 }
