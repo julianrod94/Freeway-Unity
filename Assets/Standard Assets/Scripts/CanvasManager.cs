@@ -59,6 +59,7 @@ public class CanvasManager : MonoBehaviour {
 		ScoreManager.Instance.P1Score = 0;
 		ScoreManager.Instance.P2Score = 0;
 		GameManager.Instance.State = GameState.Menu;
+		AudioManager.Instance.playMainTheme();
 	}
 
 	public void PlayGame() {
@@ -66,6 +67,7 @@ public class CanvasManager : MonoBehaviour {
 		ScoreManager.Instance.P1Score = 0;
 		ScoreManager.Instance.P2Score = 0;
 		GameManager.Instance.State = GameState.Playing;
+		AudioManager.Instance.playMainTheme();
 	}
 
 	public void SetHardDifficulty(bool player1) {

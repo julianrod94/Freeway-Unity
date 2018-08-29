@@ -16,7 +16,7 @@ namespace Standard_Assets.Scripts {
 		[SerializeField]
 		private AudioClip winnedGameSound;
 		[SerializeField]
-		private AudioClip tiedGameSound;
+		private AudioClip drawedGameSound;
 		[SerializeField]
 		private AudioClip mainTheme;
 
@@ -59,17 +59,19 @@ namespace Standard_Assets.Scripts {
 			GetComponent<AudioSource>().PlayOneShot(deathSound);
 		}
 		
-		public void playGameWinnedSound()
+		public void playWinnedGameSound()
 		{
 			GetComponent<AudioSource>().PlayOneShot(winnedGameSound);
 		}
 		
-		public void playGameTiedSound()
+		public void playDrawedGameSound()
 		{
-			GetComponent<AudioSource>().PlayOneShot(tiedGameSound);
+			GetComponent<AudioSource>().PlayOneShot(drawedGameSound);
 		}
 	
-		public void playMainTheme() {
+		public void playMainTheme()
+		{
+			//if (mainThemeLoop.isPlaying) return;
 			mainThemeLoop.Play();
 		}
 

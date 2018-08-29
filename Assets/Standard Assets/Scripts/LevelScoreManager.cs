@@ -27,7 +27,6 @@ namespace Standard_Assets.Scripts {
                     break;
             }
             
-            
         }
     }
 }

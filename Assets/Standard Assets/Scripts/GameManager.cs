@@ -46,15 +46,29 @@
         
         public void RemoveTime() {
             Time = ((Time+120) % 180) + 30;
+            Time = 1;
         }
 
 
         public void AdvanceTime(float deltaTime) {
             Time -= deltaTime;
             if (Time < 0) {
+                
+                var p1Score = ScoreManager.Instance.P1Score;
+                var p2Score = ScoreManager.Instance.P2Score;
+                if (p1Score != p2Score){
+                    AudioManager.Instance.stopMainTheme();
+                    AudioManager.Instance.playWinnedGameSound();
+                }
+                else
+                {
+                    AudioManager.Instance.stopMainTheme();
+                    AudioManager.Instance.playDrawedGameSound();
+                }
                 Time = 0;
                 State = GameState.Score;
-            } 
+            }
+
         }
         
     }

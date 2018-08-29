@@ -351,7 +351,7 @@ MonoBehaviour:
   player2ScoresSound: {fileID: 8300000, guid: 9620113ec8511483cb7c0ce2401e1156, type: 3}
   deathSound: {fileID: 8300000, guid: 34c980a0e51734900926d43df3d47c02, type: 3}
   winnedGameSound: {fileID: 8300000, guid: 02c61af970cf941e28933f9a6a4071ad, type: 3}
-  tiedGameSound: {fileID: 8300000, guid: 050bac8e54caf483ea9dd423377b987d, type: 3}
+  drawedGameSound: {fileID: 8300000, guid: 050bac8e54caf483ea9dd423377b987d, type: 3}
   mainTheme: {fileID: 8300000, guid: a755fa6f4936d4da2aaa7148a2c77b45, type: 3}
 --- !u!82 &162124391
 AudioSource:
@@ -3094,9 +3094,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextScoreP1: {fileID: 1051871192}
   TextScoreP2: {fileID: 1909103765}
-  Player1Wins: {fileID: 0}
-  Player2Wins: {fileID: 0}
-  Draw: {fileID: 0}
+  Player1Wins: {fileID: 1512989437}
+  Player2Wins: {fileID: 743930099}
+  Draw: {fileID: 56890219}
 --- !u!1 &1198512759
 GameObject:
   m_ObjectHideFlags: 0
