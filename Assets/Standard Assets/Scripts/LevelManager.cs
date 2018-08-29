@@ -160,7 +160,8 @@ namespace Standard_Assets.Scripts {
             var randomLevel = new Vehicle[10][];
             for (int i = 0; i < 10; i++) {
                 var lane = new Vehicle[maxCars];
-                for (int j = 0; j < maxCars; j++) {
+                lane[0] = Vehicle.Car;
+                for (int j = 1; j < maxCars; j++) {
                     lane[j] = GetNextRandomVehicle();
                 }
                 randomLevel[i] = lane;
@@ -171,11 +172,11 @@ namespace Standard_Assets.Scripts {
 
         private static Vehicle GetNextRandomVehicle() {
             var rand = Random.value;
-            if (rand < 0.8) {
+            if (rand < 0.93) {
                 return Vehicle.None;
             }
 
-            if (rand < 0.95) {
+            if (rand < 0.985) {
                 return Vehicle.Car;
             }
 

@@ -48,6 +48,10 @@ namespace Standard_Assets.Scripts {
         //Player
         public static class Player {
             public static float Speed = 2f;
+
+            public static void Calculate() {
+                Speed = GameConstants.World.Height / 8.0f;
+            }
         }
         
         //Controlable
@@ -72,10 +76,10 @@ namespace Standard_Assets.Scripts {
         //Car
         public static class Car {
             public static float InitialSpeed;
-            public static float ChanceChangingSpeed = 0.005f;
+            public static float ChanceChangingSpeed = 0.01f;
 
             public static void Calculate() {
-                InitialSpeed = World.Width / 8.0f;
+                InitialSpeed = World.Width / 9.0f;
             }
         }
 
