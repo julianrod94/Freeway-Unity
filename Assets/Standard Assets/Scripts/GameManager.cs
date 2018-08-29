@@ -46,7 +46,6 @@
         
         public void RemoveTime() {
             Time = ((Time+120) % 180) + 30;
-            Time = 1;
         }
 
 
